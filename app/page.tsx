@@ -191,9 +191,10 @@ export default function HomePage() {
                 <p className="mt-3 text-xs text-neutral-400">File is cleared when you convert another article.</p>
               </div>
 
-              <OpenInBooks />
             </>
           )}
+
+          <OpenInBooks />
         </div>
       </main>
     </div>
