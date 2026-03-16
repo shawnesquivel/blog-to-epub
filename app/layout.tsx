@@ -5,18 +5,18 @@ import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://localhost:3000"),
-  title: "Article to EPUB",
-  description: "Convert any article into a downloadable EPUB for Apple Books.",
+  title: "Blog to EPUB",
+  description: "Convert any blog post into a downloadable EPUB for Apple Books.",
   openGraph: {
-    title: "Article to EPUB",
-    description: "Convert any article into a downloadable EPUB for Apple Books.",
+    title: "Blog to EPUB",
+    description: "Convert any blog post into a downloadable EPUB for Apple Books.",
     type: "website",
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Open book on a table" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Article to EPUB",
-    description: "Convert any article into a downloadable EPUB for Apple Books.",
+    title: "Blog to EPUB",
+    description: "Convert any blog post into a downloadable EPUB for Apple Books.",
     images: ["/og.jpg"],
   },
 };

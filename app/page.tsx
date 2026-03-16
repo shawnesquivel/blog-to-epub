@@ -89,7 +89,7 @@ export default function HomePage() {
     <div className="min-h-svh flex flex-col">
       {/* Top nav bar */}
       <header className="border-b border-neutral-200 px-6 h-14 flex items-center shrink-0">
-        <span className="text-[15px] font-semibold tracking-tight text-neutral-900">Article to EPUB</span>
+        <a href="https://blogtoepub.com" className="text-[15px] font-semibold tracking-tight text-neutral-900 hover:text-neutral-600 transition-colors">Blog to EPUB</a>
       </header>
 
       {/* Main content */}
