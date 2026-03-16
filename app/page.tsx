@@ -2,6 +2,8 @@
 
 import { FormEvent, useState } from "react";
 
+import OpenInBooks from "./components/open-in-books";
+
 type UiState = "idle" | "loading" | "success" | "error";
 
 function Spinner() {
@@ -167,26 +169,30 @@ export default function HomePage() {
 
           {/* Success result */}
           {status === "success" && downloadHref && (
-            <div className="mt-6 rounded-md border border-neutral-200 bg-neutral-50 p-5">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-medium text-neutral-900">{downloadName}</p>
-                  <p className="mt-0.5 text-xs text-neutral-500">
-                    {articleTitle}
-                    {typeof chapterCount === "number" && chapterCount > 0 && <> &middot; {chapterCount} chapters</>}
-                    {typeof elapsed === "number" && <> &middot; {(elapsed / 1000).toFixed(1)}s</>}
-                  </p>
+            <>
+              <div className="mt-6 rounded-md border border-neutral-200 bg-neutral-50 p-5">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-neutral-900">{downloadName}</p>
+                    <p className="mt-0.5 text-xs text-neutral-500">
+                      {articleTitle}
+                      {typeof chapterCount === "number" && chapterCount > 0 && <> &middot; {chapterCount} chapters</>}
+                      {typeof elapsed === "number" && <> &middot; {(elapsed / 1000).toFixed(1)}s</>}
+                    </p>
+                  </div>
+                  <a
+                    href={downloadHref}
+                    download={downloadName}
+                    className="shrink-0 rounded-md bg-violet-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-violet-700 transition-colors"
+                  >
+                    Download
+                  </a>
                 </div>
-                <a
-                  href={downloadHref}
-                  download={downloadName}
-                  className="shrink-0 rounded-md bg-violet-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-violet-700 transition-colors"
-                >
-                  Download
-                </a>
+                <p className="mt-3 text-xs text-neutral-400">File is cleared when you convert another article.</p>
               </div>
-              <p className="mt-3 text-xs text-neutral-400">File is cleared when you convert another article.</p>
-            </div>
+
+              <OpenInBooks />
+            </>
           )}
         </div>
       </main>
