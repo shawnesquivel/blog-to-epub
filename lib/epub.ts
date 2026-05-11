@@ -29,7 +29,7 @@ a { color: #0b65d8; text-decoration: none; }
   const buffer = await epub(
     {
       title: article.title,
-      author: article.author || "Unknown",
+      author: article.author,
       description: `Generated from ${article.url}`,
       lang: "en",
       css,

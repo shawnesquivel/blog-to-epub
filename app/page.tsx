@@ -2,7 +2,7 @@
 
 import { FormEvent, useState } from "react";
 
-import OpenInBooks from "./components/open-in-books";
+import Faq from "./components/faq";
 import LibraryCarousel from "./components/library-carousel";
 
 type UiState = "idle" | "loading" | "success" | "error";
@@ -199,7 +199,7 @@ export default function HomePage() {
             </>
           )}
 
-          <OpenInBooks />
+          <Faq />
         </div>
       </main>
 
