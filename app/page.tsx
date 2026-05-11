@@ -2,7 +2,8 @@
 
 import { FormEvent, useState } from "react";
 
-import OpenInBooks from "./components/open-in-books";
+import Faq from "./components/faq";
+import LibraryCarousel from "./components/library-carousel";
 
 type UiState = "idle" | "loading" | "success" | "error";
 
@@ -90,6 +91,10 @@ export default function HomePage() {
       {/* Top nav bar */}
       <header className="border-b border-neutral-200 px-6 h-14 flex items-center shrink-0">
         <a href="https://blogtoepub.com" className="text-[15px] font-semibold tracking-tight text-neutral-900 hover:text-neutral-600 transition-colors">Blog to EPUB</a>
+        <nav className="ml-8 flex items-center gap-6">
+          <a href="/" className="text-sm font-medium text-neutral-900">Convert</a>
+          <a href="/library" className="text-sm text-neutral-500 hover:text-neutral-900 transition-colors">Library</a>
+        </nav>
       </header>
 
       {/* Main content */}
@@ -194,9 +199,12 @@ export default function HomePage() {
             </>
           )}
 
-          <OpenInBooks />
+          <Faq />
         </div>
       </main>
+
+      {/* Library carousel section */}
+      <LibraryCarousel />
     </div>
   );
 }
