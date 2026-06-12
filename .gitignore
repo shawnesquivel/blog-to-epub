@@ -8,3 +8,7 @@ __pycache__/
 .env
 .env.local
 tsconfig.tsbuildinfo
+
+# Chrome extension build + test artifacts
+extension/dist/
+extension/test-output/

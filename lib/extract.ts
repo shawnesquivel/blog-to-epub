@@ -1,4 +1,4 @@
-import { extract } from "@extractus/article-extractor";
+import { extract, extractFromHtml } from "@extractus/article-extractor";
 
 export type ExtractedArticle = {
   title: string;
@@ -25,19 +25,47 @@ function guessAuthorFromUrl(url: string): string | null {
   return null;
 }
 
-export async function extractArticle(url: string): Promise<ExtractedArticle> {
-  const article = await extract(url, { contentLengthThreshold: 200 }, { signal: AbortSignal.timeout(20_000) });
-  if (!article?.content) {
-    throw new Error("Could not extract article content from URL.");
+type RawArticle = {
+  title?: string;
+  author?: string;
+  url?: string;
+  content?: string;
+} | null;
+
+/** Collapse all whitespace (incl. non-breaking spaces from live DOMs) to single spaces. */
+function cleanText(input: string): string {
+  return input.replace(/\s+/g, " ").trim();
+}
+
+function normalizeArticle(raw: RawArticle, sourceUrl: string): ExtractedArticle {
+  if (!raw?.content) {
+    throw new Error("Could not extract article content.");
   }
 
-  const extractedAuthor = article.author?.trim();
+  const url = raw.url || sourceUrl;
+  const extractedAuthor = cleanText(raw.author || "");
   const author = extractedAuthor || guessAuthorFromUrl(url) || "Unknown";
 
   return {
-    title: (article.title || "Untitled Article").trim(),
+    title: cleanText(raw.title || "") || "Untitled Article",
     author,
-    url: article.url || url,
-    contentHtml: article.content.trim(),
+    url,
+    contentHtml: raw.content.trim(),
   };
+}
+
+/** Fetch a URL and extract the article (server-side path, used by the web app). */
+export async function extractArticle(url: string): Promise<ExtractedArticle> {
+  const article = await extract(url, { contentLengthThreshold: 200 }, { signal: AbortSignal.timeout(20_000) });
+  return normalizeArticle(article, url);
+}
+
+/**
+ * Extract the article from already-captured HTML (used by the Chrome
+ * extension, which serializes the live DOM of the current tab — so it also
+ * works on pages that need login or client-side rendering).
+ */
+export async function extractArticleFromHtml(html: string, url: string): Promise<ExtractedArticle> {
+  const article = await extractFromHtml(html, url, { contentLengthThreshold: 200 });
+  return normalizeArticle(article, url);
 }

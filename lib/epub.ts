@@ -26,7 +26,8 @@ a { color: #0b65d8; text-decoration: none; }
     content: `${sanitizeChapterHtml(chapter.html)}<p><em>Source:</em> <a href="${article.url}">${article.url}</a></p>`,
   }));
 
-  const buffer = await epub(
+  // Returns a Buffer in Node and a Blob in the browser (Chrome extension).
+  const result: unknown = await epub(
     {
       title: article.title,
       author: article.author,
@@ -35,11 +36,17 @@ a { color: #0b65d8; text-decoration: none; }
       css,
       version: 3,
       prependChapterTitles: true,
+      ignoreFailedDownloads: true,
     },
     content
   );
 
+  const bytes =
+    result instanceof Uint8Array
+      ? new Uint8Array(result)
+      : new Uint8Array(await (result as Blob).arrayBuffer());
+
   const safeBase = slugify(article.title, { lower: true, strict: true }) || "article";
   const filename = `${safeBase}.epub`;
-  return { bytes: new Uint8Array(buffer), filename };
+  return { bytes, filename };
 }

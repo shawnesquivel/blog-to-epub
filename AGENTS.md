@@ -2,7 +2,7 @@
 
 ## Cursor Cloud specific instructions
 
-This is a single Next.js 16 application (frontend + API in one process). No database, Docker, or external services required.
+A Next.js 16 application (frontend + API in one process) at the repo root, plus a Chrome MV3 extension in `extension/` that reuses the shared `lib/` pipeline. No database, Docker, or external services required.
 
 ### Key commands
 
@@ -12,6 +12,8 @@ This is a single Next.js 16 application (frontend + API in one process). No data
 | Dev server | `npm run dev` (port 3000) |
 | Build | `npm run build` |
 | Type check | `npx tsc --noEmit` |
+| Extension build | `cd extension && npm install && npm run build` |
+| Extension tests | `cd extension && npm test` (smoke + Playwright e2e; needs network) |
 
 ### Non-obvious notes
 
