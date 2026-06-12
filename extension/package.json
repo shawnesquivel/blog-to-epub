@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "node esbuild.mjs",
+    "package": "npm run build && cd dist && rm -f ../blog-to-epub-extension.zip && zip -rX ../blog-to-epub-extension.zip . -x '.DS_Store'",
     "icons": "node scripts/make-icons.mjs",
     "typecheck": "tsc --noEmit",
     "test:smoke": "tsx test/smoke.ts",

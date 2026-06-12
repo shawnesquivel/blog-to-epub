@@ -12,3 +12,4 @@ tsconfig.tsbuildinfo
 # Chrome extension build + test artifacts
 extension/dist/
 extension/test-output/
+extension/*.zip
