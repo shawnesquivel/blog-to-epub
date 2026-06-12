@@ -46,8 +46,8 @@ npm test             # both
 The e2e run leaves the generated `.epub` files in `test-output/` if you want
 to open them in Apple Books.
 
-## Regenerate icons
+## Icons
 
-```bash
-npm run icons
-```
+Generated with Gemini via the Composio CLI (`GEMINI_GENERATE_IMAGE`); the
+1024px master is `icon-source.png`, resized to 16/32/48/128 with `sips`.
+`npm run icons` regenerates a simpler programmatic fallback if ever needed.
